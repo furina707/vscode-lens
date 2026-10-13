@@ -1,13 +1,13 @@
 {
-	"name": "ink-and-paper",
-	"displayName": "Ink & Paper",
-	"description": "High-standard Windows Shortcut (.lnk), Linux AppImage (.AppImage), and PDF (.pdf) inspector, editor and offline viewer with zero native dependencies.",
-	"version": "0.3.0",
+	"name": "vscode-lens",
+	"displayName": "Lens",
+	"description": "Universal file inspector, editor, and viewer for VS Code with zero native dependencies.",
+	"version": "1.0.0",
 	"publisher": "furina707",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/furina707/vscode-ink-and-paper"
+		"url": "https://github.com/furina707/vscode-lens"
 	},
 	"engines": {
 		"vscode": "^1.100.0"

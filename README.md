@@ -1,34 +1,36 @@
-# LNK, AppImage & PDF Inspector for VS Code
+# Lens for VS Code
 
-跨平台 Windows 快捷方式（`.lnk`，对标 **[MS-SHLLINK]** 规范）、Linux 便携软件包（**`.AppImage`**）以及 **PDF 文档（`.pdf`）** 的二进制检视、编辑与离线原生预览扩展。
+🔍 **Lens** 是一个专为 VS Code 设计的通用文件透视、编辑与离线原生预览扩展。
 
-## ✨ 特性
-
-### 1. PDF (`.pdf`) 离线高保真预览
-- **纯原生零外部依赖**：基于 Mozilla PDF.js 引擎，100% 离线运行，无需安装任何系统阅读器或 native 动态库。
-- **流畅连续滚动与高 DPI 渲染**：自动适配高分屏（Retina / 4K）`devicePixelRatio`，字迹边缘清晰锐利。
-- **全套浏览控制**：
-  - 📄 页面导航：上一页、下一页、输入页码直接跳转、当前页自动视窗跟踪。
-  - 🔍 缩放调整：缩小、放大、适应页面、适应宽度（支持快捷键 `Ctrl + +` / `Ctrl + -`）。
-  - ↻ 页面旋转：顺时针 90° 旋转。
-  - ℹ️ 文档信息检视：提取 PDF 标题、作者、主题、制作工具 (Producer)、创建时间及 PDF 规范版本。
-
-### 2. Windows `.lnk` (MS-SHLLINK) 检视与双向编辑
-- **对标规范**：纯 TypeScript + Buffer 处理，保留 100ns 纳秒级时间戳、27 项 LinkFlags、13 项 FileAttributes 及 ExtraData 扩展块。
-- **三模式编辑与直接保存**：
-  - **📋 表单视图**：可视化修改目标路径、参数、起始位置、运行方式（常规/最大化/最小化）。
-  - **📄 INI 视图**：类 Linux 快捷方式的纯文本编辑。
-  - **`{ }` JSON 视图**：结构化 JSON 视图。
-  - **💾 直接保存**：修改后直接按 `Ctrl+S` / `Cmd+S` 重新构建写回 `.lnk` 二进制文件。
-
-### 3. Linux `.AppImage` (Type 1 & Type 2) 深度解析
-- **免挂载解析**：在 Windows 上直接读取 64 位 ELF 运行时与内嵌 SquashFS 4.0 文件系统。
-- **提取 `[Desktop Entry]`**：自动解包提取内部打包的应用名称、入口 Exec 启动指令、图标、分类与版本。
-- **组件清单与一键导出**：提取根目录 27+ 核心文件列表，一键导出 `.desktop` 文件，一键复制 Linux 快速启动命令。
+透视黑盒，化繁为简。致力于将原本在 VS Code 中打不开或仅显示乱码/二进制的文件格式，转化为直观、可交互的可视化面板与结构化数据。
 
 ---
 
-## 🚀 使用方法
+## ✨ 核心能力
 
-1. **直接点击打开**：在 VS Code 左侧资源管理器中直接左键单击任意 `.pdf`、`.lnk` 或 `.AppImage` 文件即可自动调起专有面板。
-2. **多模式/视图切换**：在顶部 Tab 自由切换表单、纯文本、JSON 与元数据检视。
+### 1. Windows `.lnk` 快捷方式（[MS-SHLLINK] 规范）
+- **高标准规范支持**：纯 TypeScript + Node.js 原生 Buffer 解析，保留 100ns 纳秒级 FILETIME 时间戳、全套 LinkFlags (27项)、FileAttributes (13项)、卷信息及 ExtraData（分布式追踪 GUID、AppUserModelID 等）。
+- **三模式编辑与安全保存**：
+  - 📋 **表单视图 (GUI Form)**：可视化修改目标路径（带浏览文件选择器）、启动参数、起始位置与运行模式。
+  - 📄 **INI 视图**：类 Linux 快捷方式的轻量纯文本编辑。
+  - `{ }` **JSON 视图**：标准结构化配置。
+  - 💾 **即时写回**：直接按下 `Ctrl+S` / `Cmd+S` 重新构建并保存为 Windows 原生 `.lnk` 二进制文件。
+
+### 2. Linux `.AppImage` 便携软件包（Type 1 & Type 2）
+- **跨平台免挂载深度解析**：无需 Linux 环境或 squashfs-tools，纯原生 Buffer + zlib 极速解析。
+- **ELF 运行时分析**：识别 x86_64 / AArch64 指令集、Type 2 标识、运行时尺寸与入口点。
+- **内嵌 `[Desktop Entry]` 提取**：自动读取 SquashFS 4.0 超级块与目录树，提取应用名称、执行指令、图标、分类与版本。
+- **组件清单与快捷指令**：完整展示打包组件清单，一键导出 `.desktop`，一键复制 Linux 快速启动命令。
+
+### 3. PDF 文档（`.pdf`）离线极速渲染
+- **毫秒级开屏**：内置 Mozilla PDF.js 引擎，预载同源消息处理，彻底消除跨域 Worker 阻塞超时。
+- **虚拟化与懒加载**：首屏秒开可见，配合 `IntersectionObserver` 按需绘制，翻阅顺畅不卡顿。
+- **全套阅读交互**：高 DPI Canvas 渲染、页面缩放、顺时针 90° 旋转、连续滚动追踪与详细文档元数据检视。
+
+---
+
+## 🚀 使用方式
+
+- **打开文件**：在 VS Code 资源管理器中直接左键单击任意支持的文件（`.lnk`、`.AppImage`、`.pdf`）。
+- **右键选择**：亦可通过右键菜单选择 `Open With... -> LNK / AppImage / PDF Viewer`。
+- **导出强类型代码**：支持在命令面板中一键导出结构化元数据为 TypeScript 代码，方便二次开发。
