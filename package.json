@@ -1,0 +1,113 @@
+{
+	"name": "ink-and-paper",
+	"displayName": "Ink & Paper",
+	"description": "High-standard Windows Shortcut (.lnk), Linux AppImage (.AppImage), and PDF (.pdf) inspector, editor and offline viewer with zero native dependencies.",
+	"version": "0.3.0",
+	"publisher": "furina707",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/furina707/vscode-ink-and-paper"
+	},
+	"engines": {
+		"vscode": "^1.100.0"
+	},
+	"categories": [
+		"Programming Languages",
+		"Other"
+	],
+	"activationEvents": [],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "lnkViewer.dumpToCode",
+				"title": "Dump LNK Metadata to Code (MS-SHLLINK)",
+				"category": "LNK Parser"
+			},
+			{
+				"command": "appimageViewer.dumpToCode",
+				"title": "Dump AppImage Metadata to Code",
+				"category": "AppImage Parser"
+			}
+		],
+		"menus": {
+			"explorer/context": [
+				{
+					"command": "lnkViewer.dumpToCode",
+					"when": "resourceExtname == .lnk",
+					"group": "navigation"
+				},
+				{
+					"command": "appimageViewer.dumpToCode",
+					"when": "resourceExtname == .AppImage || resourceExtname == .appimage",
+					"group": "navigation"
+				}
+			]
+		},
+		"customEditors": [
+			{
+				"viewType": "lnk.viewer",
+				"displayName": "LNK Inspector",
+				"selector": [
+					{
+						"filenamePattern": "*.lnk"
+					},
+					{
+						"filenamePattern": "*.LNK"
+					}
+				],
+				"priority": "default"
+			},
+			{
+				"viewType": "appimage.viewer",
+				"displayName": "AppImage Inspector",
+				"selector": [
+					{
+						"filenamePattern": "*.AppImage"
+					},
+					{
+						"filenamePattern": "*.appimage"
+					},
+					{
+						"filenamePattern": "*.APPIMAGE"
+					}
+				],
+				"priority": "default"
+			},
+			{
+				"viewType": "pdf.viewer",
+				"displayName": "PDF Viewer",
+				"selector": [
+					{
+						"filenamePattern": "*.pdf"
+					},
+					{
+						"filenamePattern": "*.PDF"
+					}
+				],
+				"priority": "default"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint",
+		"watch": "tsc -watch -p ./",
+		"package": "vsce package --allow-missing-repository"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.13.0",
+		"@stylistic/eslint-plugin": "^2.9.0",
+		"@types/node": "^22",
+		"@types/vscode": "^1.100.0",
+		"@vscode/vsce": "^3.2.1",
+		"eslint": "^9.13.0",
+		"typescript": "^5.8.2",
+		"typescript-eslint": "^8.26.0"
+	},
+	"dependencies": {
+		"pdfjs-dist": "^3.11.174"
+	}
+}
